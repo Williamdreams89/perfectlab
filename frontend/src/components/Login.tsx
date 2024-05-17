@@ -2,6 +2,7 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 import { FormEventHandler, useState } from "react";
 import GoogleLogin from "react-google-login";
+import { Input, TextInput } from "@mantine/core";
 
 
 export const Login = () => {
@@ -79,13 +80,9 @@ export const Login = () => {
         /> */}
         <form onSubmit={onFormSubmit} className=" w-[90%] flex flex-col gap-[2rem]">
           <div className="w-[88%] m-auto">
-            <label htmlFor="email" >Email:</label>
-            <input className=" focus:border-none focus:outline-none" type="email" name="email" id="" style={{border:"2px solid rgba(37, 99, 235, 0.2)"}} onChange={emailChange} />
-          </div>
-          <div>
-            <label htmlFor="password">Password:</label>
-            <input type="password" name="password" id="" className="focus:border-none focus:outline-none" style={{border:"2px solid rgba(37, 99, 235, 0.2)"}} onChange={passwordChange}/>
-          </div>
+            <TextInput label='Email' withAsterisk type="email" onChange={emailChange} />
+            <TextInput label="Password" withAsterisk type="password" onChange={passwordChange}/>
+            </div>
           <button type="submit" className="bg-blue-500 p-2 rounded-lg no-underline text-white">Login</button>
         </form>
       </div>

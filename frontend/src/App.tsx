@@ -9,6 +9,8 @@ import BookAppointment from './components/perfectlab/BookAppointment'
 import AddNewClient from './components/perfectlab/AddNewClient'
 import MyAppointment from './components/perfectlab/MyAppointment'
 import '@mantine/core/styles.css';
+import ProtectedLayout from './components/perfectlab/ProtectedRoutes'
+import DefaultLayout from './components/perfectlab/DefaultRoutes'
 
 
 const App = () => {
@@ -19,12 +21,16 @@ const App = () => {
     <div className=' h-[98%] mt-[1rem]' style={{minWidth:"500px"}}>
     <Router>
       <Routes>
+        <Route element={<ProtectedLayout />}>
         <Route path='/' element={<MyDashboard  />} />
         <Route path='/myAppointments' element={<MyAppointment />} />
         <Route path='/findAppointment' element={<FindAppointment />} />
         <Route path='/addNewAppointment' element={<BookAppointment />} />
         <Route path='/addNewClient' element={<AddNewClient />} />
+        </Route>
+        <Route element={<DefaultLayout />}>
         <Route path="/login" element={<Login />} />
+        </Route>
       </Routes>
     </Router>
     </div>
