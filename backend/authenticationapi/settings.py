@@ -37,7 +37,7 @@ SECRET_KEY = "django-insecure-2rhr7f%h)ti=#23phk(x%sf81i#7d3rupz&az4(9xv%@8mcg1=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://perfectlab-backend.onrender.com", "http://127.0.0.1"]
+ALLOWED_HOSTS = ["perfectlab-backend.onrender.com", "127.0.0.1"]
 
 
 # Application definition
