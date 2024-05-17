@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.app{
+  min-height: 100vh;
+  overflow-y: hidden;
+}
+
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.menu_items{}
+
+@media screen and (max-width:400) {
+  .menu_items{
+    display: none;
+  }
+}
