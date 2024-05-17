@@ -37,7 +37,7 @@ SECRET_KEY = "django-insecure-2rhr7f%h)ti=#23phk(x%sf81i#7d3rupz&az4(9xv%@8mcg1=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["https://perfectlab-backend.onrender.com", "http://127.0.0.1"]
 
 
 # Application definition
@@ -185,8 +185,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Google configuration
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env("DJANGO_GOOGLE_OAUTH2_CLIENT_ID")
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env("DJANGO_GOOGLE_OAUTH2_CLIENT_SECRET")
+
 
 # Define SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE to get extra permissions from Google.
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
