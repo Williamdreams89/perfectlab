@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Navigation } from './components/Navigation'
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom"
 import { Login } from './components/Login'
@@ -14,6 +14,12 @@ import DefaultLayout from './components/perfectlab/DefaultRoutes'
 
 
 const App = () => {
+  
+  useEffect(()=>{
+      setInterval(()=>{
+        localStorage.removeItem("access_token_f")
+      }, 600000)
+  },[])
   return (
     <>
     <div className="app relative flex gap-2">

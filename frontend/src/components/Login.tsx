@@ -48,7 +48,7 @@ export const Login = () => {
 
   const onFormSubmit = async (event:any) => {
     event.preventDefault()
-    const {data} = await axios.post("http://127.0.0.1:8000/user/login/", {email:email, password:password})
+    const {data} = await axios.post("https://perfectlab-backend.onrender.com/user/login/", {email:email, password:password})
     console.log(data, data["tokens"]["access_token"])
     localStorage.clear()
     localStorage.setItem("access_token_f", data["tokens"]["access_token"])
@@ -68,8 +68,8 @@ export const Login = () => {
 
   return (
     <div className=" flex justify-center items-center flex-col w-[100vw] h-[100vh] absolute bg-white z-50 left-0 top-0">
-      <h2>Sign In</h2>
-      <div className="w-[30vw] flex flex-col gap-[2rem]">
+      <h2 className=" text-2xl font-extrabold"><span>Perfect<span>Lab</span> </span>Sign In</h2>
+      <div className="w-[90%] lg:w-[40vw]">
         {/* <GoogleLogin
           // clientId={clientId}
           buttonText="Sign in with Google"
@@ -78,8 +78,8 @@ export const Login = () => {
           cookiePolicy={"single_host_origin"}
           className=" w-[70%] m-auto text-center"
         /> */}
-        <form onSubmit={onFormSubmit} className=" w-[90%] flex flex-col gap-[2rem]">
-          <div className="w-[88%] m-auto">
+        <form onSubmit={onFormSubmit} className=" w-[100%] h-[80%] flex flex-col gap-[2rem]">
+          <div className=" w-[95%] m-auto">
             <TextInput label='Email' withAsterisk type="email" onChange={emailChange} />
             <TextInput label="Password" withAsterisk type="password" onChange={passwordChange}/>
             </div>
