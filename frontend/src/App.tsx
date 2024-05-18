@@ -11,6 +11,7 @@ import MyAppointment from './components/perfectlab/MyAppointment'
 import '@mantine/core/styles.css';
 import ProtectedLayout from './components/perfectlab/ProtectedRoutes'
 import DefaultLayout from './components/perfectlab/DefaultRoutes'
+import { ScrollArea } from '@mantine/core'
 
 
 const App = () => {
@@ -21,10 +22,9 @@ const App = () => {
       }, 600000)
   },[])
   return (
-    <>
-    <div className="app relative flex gap-2">
+    <div className="app relative flex gap-2 w-max">
     <Aside />
-    <div className=' h-[98%] mt-[1rem]' style={{minWidth:"500px"}}>
+    <ScrollArea className=' h-[98%] mt-[1rem]'>
     <Router>
       <Routes>
         <Route element={<ProtectedLayout />}>
@@ -39,9 +39,8 @@ const App = () => {
         </Route>
       </Routes>
     </Router>
+    </ScrollArea>
     </div>
-    </div>
-    </>
   )
 }
 
