@@ -140,13 +140,51 @@ class TokenIsExpiredOrObjectAPI(generics.GenericAPIView):
         
 class LabTechSignUpAPIView(generics.GenericAPIView):
     """APIView for Lab Technician Sign up"""
-    serializer_class = UserSerializer
+    serializer_class = LabTechSignUpSerializer
     
     def post(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.validated_data
-        user = User.objects.get(email=serializer.data["email"]) 
-        user.is_lab_technician = True
-        user.save()
+        serializer.validated_data["is_lab_technician"] = True
+        serializer.validated_data["is_verified"] = True
+        print(serializer.validated_data, type(serializer.validated_data))
+        serializer.save()
+        print(serializer.save())
+
         return Response("lab technician created", status=status.HTTP_200_OK)
+        
+class LabClerkSignUpAPIView(generics.GenericAPIView):
+    """APIView for Lab Technician Sign up"""
+    serializer_class = LabClerkSignUpSerializer
+    
+    def post(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.validated_data
+        serializer.validated_data["is_clerk"] = True
+        serializer.validated_data["is_verified"] = True
+        print(serializer.validated_data, type(serializer.validated_data))
+        serializer.save()
+        print(serializer.save())
+
+        return Response("lab clerk created", status=status.HTTP_200_OK)
+
+    
+class EmployerSignUpAPIView(generics.GenericAPIView):
+    """APIView for Lab Technician Sign up"""
+    serializer_class = LabClerkSignUpSerializer
+    
+    def post(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.validated_data
+        serializer.validated_data["is_employer"] = True
+        serializer.validated_data["is_verified"] = True
+        print(serializer.validated_data, type(serializer.validated_data))
+        serializer.save()
+        print(serializer.save())
+
+        return Response("employer created", status=status.HTTP_200_OK)
+
+    

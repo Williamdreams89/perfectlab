@@ -44,3 +44,18 @@ class TokenIsExpiredSerializer(serializers.Serializer):
 
     def validate(self, attrs):
         return super().validate(attrs)
+    
+class LabTechSignUpSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["email","first_name","last_name","password", "is_lab_technician", "is_verified"]
+    
+class LabClerkSignUpSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["email","first_name","last_name","password", "is_clerk", "is_verified"]
+
+class EmployerSignUpSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["email","first_name","last_name","password", "is_employer", "is_verified"]
