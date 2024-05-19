@@ -2,53 +2,19 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 import { FormEventHandler, useState } from "react";
 import GoogleLogin from "react-google-login";
-import { Input, TextInput } from "@mantine/core";
+import { ComboboxItem, Input, NativeSelect, Select, TextInput } from "@mantine/core";
 
 
 export const Login = () => {
-  // const clientId =
-  //   "676246280208-ulhmdscj2ndbe5k6qo6v5pj5pelep5a0.apps.googleusercontent.com";
-
-  // const onSuccess = async (res: any) => {
-  //   console.log("succzddgsfgess:", res.accessToken);
-  //   const user = {
-  //     grant_type: "convert_token",
-  //     client_id: clientId,
-  //     client_secret: "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",
-  //     backend: "google-oauth2",
-  //     token: res.accessToken,
-  //   };
-  //   //console.log(user)
-  //   const { data } = await axios.post(
-  //     "http://localhost:8000/user/oauth2/convert-token/",
-  //     user,
-  //     {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     }
-  //   );
-
-  //   //console.log(data, data['access_token'])
-  //   axios.defaults.headers.common[
-  //     "Authorization"
-  //   ] = `Bearer ${data["access_token"]}`;
-  //   localStorage.clear();
-  //   localStorage.setItem("access_token", data.access_token);
-  //   localStorage.setItem("refresh_token", data.refresh_token);
-  //   window.location.href = "/";
-  // };
-
-  // const onFailure = (err: any) => {
-  //   console.log("failed:", err);
-  // };
-
+  
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [loagingPage, setLoginPage] = useState(false)
   const [signUpPage, setSignUpPage] = useState(false)
-  const [pwdResetPage, setPwdResetPage] = useState(false)
+  const [currentPage, setCurrentPage] = useState<ComboboxItem | null>(null)
+
+  
 
   const onFormSubmit = async (event:any) => {
     event.preventDefault()
@@ -79,18 +45,40 @@ export const Login = () => {
   }
 
   return (
-    <div className=" flex justify-center items-center flex-col w-[100vw] h-[100vh] absolute bg-white z-50 left-0 top-0">
+    <div className="flex justify-center w-[100vw] h-[140vh] absolute bg-white z-50 left-0 top-0">
+      <div className="w-[600px] mt-[7rem] relative" style={{border:"1px solid rgba(107, 114, 128, .2)"}}>
+      <h2 className=" text-center text-2xl font-extrabold"><span>Perfect<span>Lab</span> </span></h2>
+
+    <div className="w-max absolute top-[6rem] right-3">
+    <Select
+        placeholder="Select loggin in mode"
+        data={[{ value: 'technician', label: 'Log in as technician' },{ value: 'clerk', label: 'Log in as clerk' }, { value: 'employer', label: 'Log in as Employer' }]}
+        value={currentPage ? currentPage.value : null}
+        onChange={(_value, option) => {setCurrentPage(option); console.log("option=", option, "\n","value=",_value)}}
+        allowDeselect={false}
+        />
+    </div>
+        {currentPage?.value ==="clerk" && <h3 className=" text-center">Sign In as a Clerk</h3>}
+        {currentPage?.value ==="technician" && <h3 className=" text-center">Sign In as a Technician</h3>}
+        {currentPage?.value ==="employer" && <h3 className=" text-center">Sign In as a Employer</h3>}
+    {currentPage?.value ==="clerk" &&<div className="">
         {isLoading ? <div className=" flex flex-col gap-3 text-xl font-semibold"><img src="gifs/loading.gif" alt="" /><p>Fetching data</p></div> :
       <div className="w-[90%] lg:w-[40vw]">
-        <h2 className=" text-center text-2xl font-extrabold"><span>Perfect<span>Lab</span> </span>Sign In</h2>
-        {/* <GoogleLogin
-          // clientId={clientId}
-          buttonText="Sign in with Google"
-          // onSuccess={onSuccess}
-          // onFailure={onFailure}
-          cookiePolicy={"single_host_origin"}
-          className=" w-[70%] m-auto text-center"
-        /> */}
+        
+        <form onSubmit={onFormSubmit} className=" w-[80%] m-auto mt-[6rem] h-[80%] flex flex-col gap-[2rem]">
+          <div className=" w-[95%] m-auto">
+            <TextInput label='Email' withAsterisk type="email" onChange={emailChange} />
+            <TextInput label="Password" withAsterisk type="password" onChange={passwordChange}/>
+            </div>
+          {<button type="submit" className="bg-blue-500 p-2 rounded-lg no-underline text-white">Login</button>}
+        </form>
+      </div>
+      }
+    </div>}
+    {currentPage?.value ==="technician" &&<div className="">
+        {isLoading ? <div className=" flex flex-col gap-3 text-xl font-semibold"><img src="gifs/loading.gif" alt="" /><p>Fetching data</p></div> :
+      <div className="w-[90%] lg:w-[40vw]">
+        
         <form onSubmit={onFormSubmit} className=" w-[100%] h-[80%] flex flex-col gap-[2rem]">
           <div className=" w-[95%] m-auto">
             <TextInput label='Email' withAsterisk type="email" onChange={emailChange} />
@@ -100,6 +88,24 @@ export const Login = () => {
         </form>
       </div>
       }
+    </div>}
+    {currentPage?.value ==="employer" &&<div className="">
+        {isLoading ? <div className=" flex flex-col gap-3 text-xl font-semibold"><img src="gifs/loading.gif" alt="" /><p>Fetching data</p></div> :
+      <div className="w-[90%] lg:w-[40vw]">
+        <form onSubmit={onFormSubmit} className=" w-[100%] h-[80%] flex flex-col gap-[2rem]">
+          <div className=" w-[95%] m-auto">
+            <TextInput label='Email' withAsterisk type="email" onChange={emailChange} />
+            <TextInput label="Password" withAsterisk type="password" onChange={passwordChange}/>
+            </div>
+          {<button type="submit" className="bg-blue-500 p-2 rounded-lg no-underline text-white">Login</button>}
+        </form>
+      </div>
+      }
+    </div>}
+      </div>
     </div>
   );
 };
+
+
+
