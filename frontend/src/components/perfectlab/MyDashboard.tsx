@@ -4,6 +4,8 @@ import { IconUser } from '@tabler/icons-react';
 import { LineChart } from 'recharts';
 
 const MyDashboard = () => {
+
+  
   const data = [
     { name: 'USA', value: 400, color: 'indigo.6' },
     { name: 'India', value: 300, color: 'yellow.6' },
@@ -20,23 +22,28 @@ const MyDashboard = () => {
     { month: 'June', "Malaria Tests": 750, "DNA Test": 600, "Test for STDs": 1000 },
   ]
   return (
-    <div className='flex flex-col gap-6'>
-      <div><h2>Welcome back, William</h2></div>
-      <div className=" flex gap-4">
-        <div className="">
+    <div className='ml-[2rem] flex flex-col gap-3 ' style={{minWidth:"100vw", height:"100%"}}>
+      <div><h2 className=' text-3xl font-bold'>Welcome back, William</h2></div>
+      <div className=" flex justify-between w-[70%] items-center">
+        <div className=" flex flex-col items-center">
         <RingProgress
+        size={200}
+        thickness={25}
         sections={[{ value: 40, color: 'teal' }]} 
         label={
           <Center>
             <ActionIcon color="teal" variant="light" radius="xl" size="xl">
-              <IconUser style={{ width: rem(22), height: rem(22) }} />
+              <IconUser style={{ width: rem(32), height: rem(32) }} />
             </ActionIcon>
           </Center>
         }
         />
-        Users (Insured & NonInsured)
+        <h4>Insured & Non-insured Clients</h4>
         </div>
-        <div className="">Ring Progress</div>
+        <div className="">
+        <DonutChart paddingAngle={10} size={180} thickness={25} data={data} />;
+        <h4>Diagnostic Test Types</h4>
+        </div>
         <div className="">
         <Sparkline
         w={200}
@@ -45,8 +52,11 @@ const MyDashboard = () => {
         trendColors={{ positive: 'teal.6', negative: 'red.6', neutral: 'gray.5' }}
         fillOpacity={0.2}
       />
+      <h2>Lab Client Progression Status</h2>
         </div>
       </div>
+      <div className=' w-[900px] h-[400px]'>
+
       <BarChart
       h={300}
       data={linedata}
@@ -58,6 +68,7 @@ const MyDashboard = () => {
         { name: 'Test for STDs', color: 'teal.6' },
       ]}
     />
+      </div>
     </div>
   )
 }

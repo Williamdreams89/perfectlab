@@ -11,20 +11,23 @@ import MyAppointment from './components/perfectlab/MyAppointment'
 import '@mantine/core/styles.css';
 import ProtectedLayout from './components/perfectlab/ProtectedRoutes'
 import DefaultLayout from './components/perfectlab/DefaultRoutes'
-import { ScrollArea } from '@mantine/core'
+import { setTimeout } from 'timers'
+import { useIdle } from '@mantine/hooks'
 
 
 const App = () => {
+  const userIsIdle = useIdle(1800000)
   
   useEffect(()=>{
-      setInterval(()=>{
-        localStorage.removeItem("access_token_f")
-      }, 600000)
+    
+      // setInterval(()=>{
+      //   localStorage.removeItem("access_token_f")
+      // }, 28800000)
   },[])
   return (
-    <div className="app relative flex gap-2 w-max">
+    <div className="app relative flex gap-2">
     <Aside />
-    <ScrollArea className=' h-[98%] mt-[1rem]'>
+    <div className=' h-[100vh] w-[60%] mt-[1rem]' style={{width:"6"}}>
     <Router>
       <Routes>
         <Route element={<ProtectedLayout />}>
@@ -39,7 +42,7 @@ const App = () => {
         </Route>
       </Routes>
     </Router>
-    </ScrollArea>
+    </div>
     </div>
   )
 }

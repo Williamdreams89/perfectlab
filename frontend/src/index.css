@@ -3,9 +3,24 @@
 @tailwind utilities;
 
 
+::-webkit-scrollbar{
+  display: none;
+}
+
+.stat_card{
+  box-shadow: -6px 10px 35px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: -6px 10px 35px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: -6px 10px 35px 0px rgba(0,0,0,0.75);
+
+}
+
 .app{
-  min-height: 100vh;
+  height: 100vh;
   overflow-y: hidden;
+}
+
+.aside{
+
 }
 
 
@@ -19,6 +34,10 @@
 
 @media screen and (max-width:400) {
   .menu_items{
+    display: none;
+  };
+
+  .aside{
     display: none;
   }
 }
