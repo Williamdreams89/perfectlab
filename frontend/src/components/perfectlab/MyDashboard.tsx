@@ -1,7 +1,7 @@
 import { BarChart, DonutChart, Sparkline } from '@mantine/charts';
 import { ActionIcon, Center, RingProgress, rem } from '@mantine/core';
 import { IconUser } from '@tabler/icons-react';
-import { LineChart } from 'recharts';
+import {} from "@mantine/core"
 
 const MyDashboard = () => {
 
@@ -23,7 +23,7 @@ const MyDashboard = () => {
   ]
   return (
     <div className='ml-[2rem] flex flex-col gap-3 ' style={{minWidth:"100vw", height:"100%"}}>
-      <div><h2 className=' text-3xl font-bold'>Welcome back, William</h2></div>
+      <div><h2 className=' text-3xl font-bold'>Welcome back, {localStorage.getItem("username")}</h2></div>
       <div className=" flex justify-between w-[70%] items-center">
         <div className=" flex flex-col items-center">
         <RingProgress
@@ -55,7 +55,7 @@ const MyDashboard = () => {
       <h2>Lab Client Progression Status</h2>
         </div>
       </div>
-      <div className=' w-[900px] h-[400px]'>
+      <div className=' w-[900px] h-[400px] barchart'>
 
       <BarChart
       h={300}
