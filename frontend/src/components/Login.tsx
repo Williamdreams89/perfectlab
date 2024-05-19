@@ -46,15 +46,24 @@ export const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [loagingPage, setLoginPage] = useState(false)
+  const [signUpPage, setSignUpPage] = useState(false)
+  const [pwdResetPage, setPwdResetPage] = useState(false)
 
   const onFormSubmit = async (event:any) => {
     event.preventDefault()
-    const {data} = await axios.post("https://perfectlab-backend.onrender.com/user/login/", {email:email, password:password})
-    console.log(data, data["tokens"]["access_token"])
-    localStorage.clear()
-    localStorage.setItem("access_token_f", data["tokens"]["access_token"])
-    window.location.href = "/"
-    setIsLoading(true)
+    try{
+      setIsLoading(true)
+      const {data} = await axios.post("https://perfectlab-backend.onrender.com/user/login/", {email:email, password:password})
+      console.log(data, data["tokens"]["access_token"])
+      localStorage.clear()
+      localStorage.setItem("access_token_f", data["tokens"]["access_token"])
+      window.location.href = "/"
+    }catch(err){
+      setIsLoading(false)
+      alert("Wrong username or password")
+      console.log("error login: ", err)
+    }
   
   }
   
@@ -71,9 +80,9 @@ export const Login = () => {
 
   return (
     <div className=" flex justify-center items-center flex-col w-[100vw] h-[100vh] absolute bg-white z-50 left-0 top-0">
-        {isLoading && <p>Fetching data</p>}
-      <h2 className=" text-2xl font-extrabold"><span>Perfect<span>Lab</span> </span>Sign In</h2>
+        {isLoading ? <div className=" flex flex-col gap-3 text-xl font-semibold"><img src="gifs/loading.gif" alt="" /><p>Fetching data</p></div> :
       <div className="w-[90%] lg:w-[40vw]">
+        <h2 className=" text-center text-2xl font-extrabold"><span>Perfect<span>Lab</span> </span>Sign In</h2>
         {/* <GoogleLogin
           // clientId={clientId}
           buttonText="Sign in with Google"
@@ -87,9 +96,10 @@ export const Login = () => {
             <TextInput label='Email' withAsterisk type="email" onChange={emailChange} />
             <TextInput label="Password" withAsterisk type="password" onChange={passwordChange}/>
             </div>
-          <button type="submit" className="bg-blue-500 p-2 rounded-lg no-underline text-white">Login</button>
+          {<button type="submit" className="bg-blue-500 p-2 rounded-lg no-underline text-white">Login</button>}
         </form>
       </div>
+      }
     </div>
   );
 };
