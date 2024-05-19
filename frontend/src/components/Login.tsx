@@ -54,6 +54,8 @@ export const Login = () => {
     localStorage.clear()
     localStorage.setItem("access_token_f", data["tokens"]["access_token"])
     window.location.href = "/"
+    setIsLoading(true)
+  
   }
   
 
@@ -69,6 +71,7 @@ export const Login = () => {
 
   return (
     <div className=" flex justify-center items-center flex-col w-[100vw] h-[100vh] absolute bg-white z-50 left-0 top-0">
+        {isLoading && <p>Fetching data</p>}
       <h2 className=" text-2xl font-extrabold"><span>Perfect<span>Lab</span> </span>Sign In</h2>
       <div className="w-[90%] lg:w-[40vw]">
         {/* <GoogleLogin
