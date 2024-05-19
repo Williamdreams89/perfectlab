@@ -35,7 +35,7 @@ const Aside = () => {
             <h2>Accounts</h2>
             <h3>Logged in as: {localStorage.getItem("username")}</h3>
             <h4>My Job Role</h4>
-            <button onClick={()=>localStorage.removeItem("access_token_f")}>Logout</button>
+            <button onClick={()=>{localStorage.removeItem("access_token_f"); localStorage.removeItem("username")}}>Logout</button>
         </div>
     </div>
   )

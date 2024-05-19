@@ -45,6 +45,7 @@ export const Login = () => {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
 
   const onFormSubmit = async (event:any) => {
     event.preventDefault()

@@ -40,4 +40,8 @@
   .aside{
     display: none;
   }
+
+  .barchart{
+    width: 500px;
+  }
 }
