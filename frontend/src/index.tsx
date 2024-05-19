@@ -8,7 +8,7 @@ import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import '@mantine/charts/styles.css';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom"
-import { Login } from './components/Login';
+import { Login } from './components/perfectlab/auth/Login';
 
 
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Aside from "../Aside";
+import Aside from "../../Aside";
 import { Input, InputBase, Select, TextInput } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { IMaskInput } from "react-imask";

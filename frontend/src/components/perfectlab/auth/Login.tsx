@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import { FormEventHandler, useState } from "react";
 import GoogleLogin from "react-google-login";
 import { ComboboxItem, Input, NativeSelect, Select, TextInput } from "@mantine/core";
+import Loading from "../Loading";
 
 
 export const Login = () => {
@@ -10,8 +11,6 @@ export const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const [loagingPage, setLoginPage] = useState(false)
-  const [signUpPage, setSignUpPage] = useState(false)
   const [currentPage, setCurrentPage] = useState<ComboboxItem | null>(null)
 
   
@@ -32,7 +31,6 @@ export const Login = () => {
     }
   
   }
-  
 
   const emailChange = (e:any)=>{
     e.preventDefault()
@@ -45,11 +43,11 @@ export const Login = () => {
   }
 
   return (
-    <div className="flex justify-center w-[100vw] h-[140vh] absolute bg-white z-50 left-0 top-0">
-      <div className="w-[600px] mt-[7rem] relative" style={{border:"1px solid rgba(107, 114, 128, .2)"}}>
-      <h2 className=" text-center text-2xl font-extrabold"><span>Perfect<span>Lab</span> </span></h2>
+    <div className="flex justify-center w-[100vw] h-[100vh] absolute bg-white z-50 left-0 top-0">
+      {isLoading ? <Loading />:<div className={`w-[600px] pb-[14rem] h-min mt-[4rem] relative`} style={{border:"2px solid rgba(107, 114, 128, .2)"}}>
+      <h2 className=" mt-[1rem] text-center text-2xl font-extrabold"><span>Perfect<span>Lab</span> </span></h2>
 
-    <div className="w-max absolute top-[6rem] right-3">
+    <div className=" w-max h-max absolute top-[6rem] right-3">
     <Select
         placeholder="Select loggin in mode"
         data={[{ value: 'technician', label: 'Log in as technician' },{ value: 'clerk', label: 'Log in as clerk' }, { value: 'employer', label: 'Log in as Employer' }]}
@@ -62,7 +60,7 @@ export const Login = () => {
         {currentPage?.value ==="technician" && <h3 className=" text-center">Sign In as a Technician</h3>}
         {currentPage?.value ==="employer" && <h3 className=" text-center">Sign In as a Employer</h3>}
     {currentPage?.value ==="clerk" &&<div className="">
-        {isLoading ? <div className=" flex flex-col gap-3 text-xl font-semibold"><img src="gifs/loading.gif" alt="" /><p>Fetching data</p></div> :
+        
       <div className="w-[90%] lg:w-[40vw]">
         
         <form onSubmit={onFormSubmit} className=" w-[80%] m-auto mt-[6rem] h-[80%] flex flex-col gap-[2rem]">
@@ -70,39 +68,43 @@ export const Login = () => {
             <TextInput label='Email' withAsterisk type="email" onChange={emailChange} />
             <TextInput label="Password" withAsterisk type="password" onChange={passwordChange}/>
             </div>
-          {<button type="submit" className="bg-blue-500 p-2 rounded-lg no-underline text-white">Login</button>}
+            <small className=" text-blue-500 hover:underline text-underline text-right cursor-pointer" onClick={()=>window.location.href="/pwdResetRequest"}>I have forgot my password?</small>
+          <button type="submit" className="bg-blue-500 p-2 rounded-lg no-underline text-white">Login</button>
+          <small className=""> Don't have account? Sign in <span className=" text-blue-500 hover:underline text-left cursor-pointer" onClick={()=>window.location.href="/register"}>here</span></small>
         </form>
       </div>
-      }
+      
     </div>}
     {currentPage?.value ==="technician" &&<div className="">
-        {isLoading ? <div className=" flex flex-col gap-3 text-xl font-semibold"><img src="gifs/loading.gif" alt="" /><p>Fetching data</p></div> :
+        
       <div className="w-[90%] lg:w-[40vw]">
         
-        <form onSubmit={onFormSubmit} className=" w-[100%] h-[80%] flex flex-col gap-[2rem]">
+        <form onSubmit={onFormSubmit} className=" w-[80%] m-auto mt-[6rem] h-[80%] flex flex-col gap-[2rem]">
           <div className=" w-[95%] m-auto">
             <TextInput label='Email' withAsterisk type="email" onChange={emailChange} />
             <TextInput label="Password" withAsterisk type="password" onChange={passwordChange}/>
             </div>
-          {<button type="submit" className="bg-blue-500 p-2 rounded-lg no-underline text-white">Login</button>}
+            <small className=" text-blue-500 hover:underline text-underline text-right cursor-pointer" onClick={()=>window.location.href="/pwdResetRequest"}>I have forgot my password?</small>
+          <button type="submit" className="bg-blue-500 p-2 rounded-lg no-underline text-white">Login</button>
+          <small className=""> Don't have account? Sign in <span className=" text-blue-500 hover:underline text-left cursor-pointer" onClick={()=>window.location.href="/register"}>here</span></small>
         </form>
       </div>
-      }
     </div>}
     {currentPage?.value ==="employer" &&<div className="">
-        {isLoading ? <div className=" flex flex-col gap-3 text-xl font-semibold"><img src="gifs/loading.gif" alt="" /><p>Fetching data</p></div> :
+        
       <div className="w-[90%] lg:w-[40vw]">
-        <form onSubmit={onFormSubmit} className=" w-[100%] h-[80%] flex flex-col gap-[2rem]">
+        <form onSubmit={onFormSubmit} className=" w-[80%] m-auto mt-[6rem] h-[80%] flex flex-col gap-[2rem]">
           <div className=" w-[95%] m-auto">
             <TextInput label='Email' withAsterisk type="email" onChange={emailChange} />
             <TextInput label="Password" withAsterisk type="password" onChange={passwordChange}/>
             </div>
-          {<button type="submit" className="bg-blue-500 p-2 rounded-lg no-underline text-white">Login</button>}
+            <small className=" text-blue-500 hover:underline text-underline text-right cursor-pointer" onClick={()=>window.location.href="/pwdResetRequest"}>I have forgot my password?</small>
+          <button type="submit" className="bg-blue-500 p-2 rounded-lg no-underline text-white">Login</button>
+          <small className=""> Don't have account? Sign in <span className=" text-blue-500 hover:underline text-left cursor-pointer" onClick={()=>window.location.href="/register"}>here</span></small>
         </form>
       </div>
-      }
     </div>}
-      </div>
+      </div>}
     </div>
   );
 };
