@@ -33,7 +33,7 @@
 
 .menu_items{}
 
-@media screen and (min-width:400px) and (max-width:900px) {
+@media screen and (min-width:200px) and (max-width:900px) {
   .aside{
     min-width: 300px;
   }
