@@ -9,7 +9,7 @@ const Aside = () => {
       if (api_token) {
         const { data } = await axios.post("https://perfectlab-backend.onrender.com/user/check_token_exp/", { token: api_token });
         setAuthdata(data);
-        localStorage.setItem("username", data?.first_name)
+        localStorage.setItem("username", data?.username)
       }
     };
 
