@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import { FormEventHandler, useState } from "react";
 import GoogleLogin from "react-google-login";
 import { ComboboxItem, Input, NativeSelect, Select, TextInput } from "@mantine/core";
-import Loading from "../Loading";
+import Loading from "../common/Loading";
 
 
 export const Login = () => {

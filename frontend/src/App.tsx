@@ -4,17 +4,17 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom"
 import { Login } from './components/perfectlab/auth/Login'
 import Aside from './components/Aside'
 import MyDashboard from './components/perfectlab/clerk/MyDashboard'
-import FindAppointment from './components/perfectlab/FindAppointment'
+import FindAppointment from './components/perfectlab/common/FindAppointment'
 import BookAppointment from './components/perfectlab/clerk/BookAppointment'
 import AddNewClient from './components/perfectlab/clerk/AddNewClient'
-import MyAppointment from './components/perfectlab/MyAppointment'
+import MyAppointment from './components/perfectlab/common/MyAppointment'
 import '@mantine/core/styles.css';
-import ProtectedLayout from './components/perfectlab/ProtectedRoutes'
-import DefaultLayout from './components/perfectlab/DefaultRoutes'
+import DefaultLayout from './components/perfectlab/auth/DefaultRoutes'
 import { setTimeout } from 'timers'
 import { useIdle } from '@mantine/hooks'
 import PwdResetReq from './components/perfectlab/auth/PwdResetReq'
 import { Register } from './components/perfectlab/auth/Register'
+import ProtectedLayout from './components/perfectlab/auth/ProtectedRoutes'
 
 
 const App = () => {

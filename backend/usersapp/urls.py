@@ -9,7 +9,7 @@ urlpatterns = [
     path('labtech/register/', LabTechSignUpAPIView.as_view(), name="tech_register"),
     path('employer/register/', EmployerSignUpAPIView.as_view(), name="tech_register"),
     path('verify/', VerifyUserAPIView.as_view(), name="verify"),
-    path('clerk/login/', UserLoginAPIView.as_view(), name="login"),
+    path('login/', UserLoginAPIView.as_view(), name="login"),
     path('passreq/', UserPasswordRequestAPIView.as_view(), name="passreq"),
     path('set_password/<uuidb64>/<token>/', UserSetNewPasswordAPIView.as_view(), name="set_password"),
     path("check_token_exp/", TokenIsExpiredOrObjectAPI.as_view()),

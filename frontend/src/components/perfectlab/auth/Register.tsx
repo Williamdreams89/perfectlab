@@ -2,8 +2,9 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 import { FormEventHandler, useState } from "react";
 import GoogleLogin from "react-google-login";
-import { ComboboxItem, Input, NativeSelect, Select, TextInput } from "@mantine/core";
-import Loading from "../Loading";
+import { ComboboxItem, Input, NativeSelect, Notification, Select, TextInput, rem } from "@mantine/core";
+import Loading from "../common/Loading";
+import { IconCheck } from "@tabler/icons-react";
 
 
 export const Register = () => {
@@ -15,7 +16,7 @@ export const Register = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState<ComboboxItem | null>(null)
 
-  
+  const [isError, setIsError] = useState(false)
 
   const onFormSubmitForClerk = async (event:any) => {
     event.preventDefault()
@@ -23,10 +24,10 @@ export const Register = () => {
       setIsLoading(true)
       const {data} = await axios.post("https://perfectlab-backend.onrender.com/user/labclerk/register/", {email:email, password:password, first_name:firstName, last_name:lastName})
       console.log(data)
-      window.location.href = "/"
+      window.location.href = "/login"
     }catch(err){
       setIsLoading(false)
-      alert("Wrong username or password")
+      setIsError(true)
       console.log("error login: ", err)
     }
   
@@ -37,10 +38,10 @@ export const Register = () => {
       setIsLoading(true)
       const {data} = await axios.post("https://perfectlab-backend.onrender.com/user/labtech/register/", {email:email, password:password, first_name:firstName, last_name:lastName})
       console.log(data)
-      window.location.href = "/"
+      window.location.href = "/login"
     }catch(err){
       setIsLoading(false)
-      alert("Wrong username or password")
+      alert("Something went wrong")
       console.log("error login: ", err)
     }
   
@@ -50,10 +51,10 @@ export const Register = () => {
     try{
       setIsLoading(true)
       const {data} = await axios.post("https://perfectlab-backend.onrender.com/user/employer/register/", {email:email, password:password,  first_name:firstName, last_name:lastName})
-      console.log(data)
-      window.location.href = "/"
+      window.location.href = "/login"
     }catch(err){
       setIsLoading(false)
+      console.log({"first_name":firstName, "last_name":lastName})
       alert("Wrong username or password")
       console.log("error login: ", err)
     }
@@ -62,11 +63,11 @@ export const Register = () => {
 
   const firsNameChange = (e:any)=>{
     e.preventDefault()
-    setEmail(e.target.value)
+    setFirstName(e.target.value)
   }
   const lastNameChange = (e:any)=>{
     e.preventDefault()
-    setEmail(e.target.value)
+    setLastName(e.target.value)
   }
   const emailChange = (e:any)=>{
     e.preventDefault()
@@ -80,6 +81,10 @@ export const Register = () => {
 
   return (
     <div className="flex justify-center w-[100vw] h-[100vh] absolute bg-white z-50 left-0 top-0">
+      <div className=""></div>
+      {isError &&<Notification icon={<IconCheck style={{ width: rem(20), height: rem(20) }} />} color="teal" title="All good!" mt="md">
+        Everything is fine
+      </Notification>}
       {isLoading ? <Loading />:<div className={`w-[600px] pb-[14rem] h-min mt-[4rem] relative`} style={{border:"2px solid rgba(107, 114, 128, .2)"}}>
       <h2 className=" mt-[1rem] text-center text-2xl font-extrabold"><span>Perfect<span>Lab</span> </span></h2>
 
@@ -136,8 +141,8 @@ export const Register = () => {
         <form onSubmit={onFormSubmitForEmployer} className=" w-[80%] m-auto mt-[6rem] h-[80%] flex flex-col gap-[2rem]">
           <div className=" w-[95%] m-auto">
             <TextInput label='Email' withAsterisk type="email" onChange={emailChange} />
-            <TextInput label="First Name" withAsterisk type="text" onChange={firsNameChange}/>
-            <TextInput label='Last Name' withAsterisk type="text" onChange={lastNameChange} />
+            <TextInput label="First Name" withAsterisk type="text"  onChange={firsNameChange}/>
+            <TextInput label='Last Name' withAsterisk type="text"  onChange={lastNameChange} />
             <TextInput label="Password" withAsterisk type="password" onChange={passwordChange}/>
             </div>
             
