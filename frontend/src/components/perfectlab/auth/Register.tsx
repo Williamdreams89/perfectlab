@@ -1,8 +1,6 @@
 import axios from "axios";
-import { Navigate } from "react-router-dom";
-import { FormEventHandler, useState } from "react";
-import GoogleLogin from "react-google-login";
-import { ComboboxItem, Input, NativeSelect, Notification, Select, TextInput, rem } from "@mantine/core";
+import { useState } from "react";
+import { ComboboxItem, Notification, Select, TextInput, rem, Checkbox } from "@mantine/core";
 import Loading from "../common/Loading";
 import { IconCheck } from "@tabler/icons-react";
 
@@ -22,9 +20,8 @@ export const Register = () => {
     event.preventDefault()
     try{
       setIsLoading(true)
-      const {data} = await axios.post("https://perfectlab-backend.onrender.com/user/labclerk/register/", {email:email, password:password, first_name:firstName, last_name:lastName})
+      const {data} = await axios.post("https://perfectlab-backend.onrender.com/user/labclerk/register/", {email:email, password:password, first_name:firstName, last_name:lastName, is_clerk:true})
       console.log(data)
-      window.location.href = "/login"
     }catch(err){
       setIsLoading(false)
       setIsError(true)
@@ -36,9 +33,8 @@ export const Register = () => {
     event.preventDefault()
     try{
       setIsLoading(true)
-      const {data} = await axios.post("https://perfectlab-backend.onrender.com/user/labtech/register/", {email:email, password:password, first_name:firstName, last_name:lastName})
+      const {data} = await axios.post("https://perfectlab-backend.onrender.com/user/labtech/register/", {email:email, password:password, first_name:firstName, last_name:lastName, is_lab_technician:true})
       console.log(data)
-      window.location.href = "/login"
     }catch(err){
       setIsLoading(false)
       alert("Something went wrong")
@@ -50,8 +46,7 @@ export const Register = () => {
     event.preventDefault()
     try{
       setIsLoading(true)
-      const {data} = await axios.post("https://perfectlab-backend.onrender.com/user/employer/register/", {email:email, password:password,  first_name:firstName, last_name:lastName})
-      window.location.href = "/login"
+      const {data} = await axios.post("https://perfectlab-backend.onrender.com/user/employer/register/", {email:email, password:password,  first_name:firstName, last_name:lastName, is_employer:true})
     }catch(err){
       setIsLoading(false)
       console.log({"first_name":firstName, "last_name":lastName})

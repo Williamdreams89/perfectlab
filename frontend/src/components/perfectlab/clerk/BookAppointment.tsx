@@ -1,5 +1,5 @@
 import React from 'react'
-import Aside from '../../Aside'
+import Aside from '../common/Aside'
 
 const BookAppointment = () => {
   return (

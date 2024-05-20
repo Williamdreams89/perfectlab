@@ -47,7 +47,7 @@ class UserRegisterAPIView(generics.GenericAPIView):
     
 
 class VerifyUserAPIView(views.APIView):
-    permission_classes = (IsEmployer)
+    permission_classes = (IsEmployer,)
 
     token_param_config = openapi.Parameter(
         "token", in_=openapi.IN_QUERY, description="Enter your  token", type=openapi.TYPE_STRING)

@@ -2,6 +2,7 @@ import { BarChart, DonutChart, Sparkline } from '@mantine/charts';
 import { ActionIcon, Center, RingProgress, rem } from '@mantine/core';
 import { IconUser } from '@tabler/icons-react';
 import {} from "@mantine/core"
+import {useState} from "react"
 
 const MyDashboard = () => {
 
@@ -21,6 +22,8 @@ const MyDashboard = () => {
     { month: 'May', "Malaria Tests": 800, "DNA Test": 1400, "Test for STDs": 1200 },
     { month: 'June', "Malaria Tests": 750, "DNA Test": 600, "Test for STDs": 1000 },
   ]
+
+  const [] = useState<boolean>()
   return (
     <div className='ml-[2rem] flex flex-col gap-3 ' style={{minWidth:"100vw", height:"100%"}}>
       <div><h2 className=' text-3xl font-bold'>Welcome back, {localStorage.getItem("username")}</h2></div>

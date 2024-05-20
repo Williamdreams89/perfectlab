@@ -1,9 +1,7 @@
 import axios from "axios";
-import { Navigate } from "react-router-dom";
-import { FormEventHandler, useState } from "react";
-import GoogleLogin from "react-google-login";
-import { ComboboxItem, Input, NativeSelect, Select, TextInput } from "@mantine/core";
+import { ComboboxItem, Select, TextInput } from "@mantine/core";
 import Loading from "../common/Loading";
+import React, {useState, useEffect} from "react"
 
 
 export const Login = () => {
@@ -23,6 +21,10 @@ export const Login = () => {
       console.log(data, data["tokens"]["access_token"])
       localStorage.clear()
       localStorage.setItem("access_token_f", data["tokens"]["access_token"])
+      await axios.post("https://perfectlab-backend.onrender.com/user/", {token:localStorage.getItem("access_token_f")})
+      .then((response:any)=>{
+        console.log(response.data)
+      })
       window.location.href = "/"
     }catch(err){
       setIsLoading(false)
@@ -31,6 +33,7 @@ export const Login = () => {
     }
   
   }
+  
 
   const emailChange = (e:any)=>{
     e.preventDefault()
@@ -70,7 +73,7 @@ export const Login = () => {
             </div>
             <small className=" text-blue-500 hover:underline text-underline text-right cursor-pointer" onClick={()=>window.location.href="/pwdResetRequest"}>I have forgot my password?</small>
           <button type="submit" className="bg-blue-500 p-2 rounded-lg no-underline text-white">Login</button>
-          <small className=""> Don't have account? Sign in <span className=" text-blue-500 hover:underline text-left cursor-pointer" onClick={()=>window.location.href="/register"}>here</span></small>
+          <small className=""> Don't have account? Sign up <span className=" text-blue-500 hover:underline text-left cursor-pointer" onClick={()=>window.location.href="/register"}>here</span></small>
         </form>
       </div>
       
@@ -86,7 +89,7 @@ export const Login = () => {
             </div>
             <small className=" text-blue-500 hover:underline text-underline text-right cursor-pointer" onClick={()=>window.location.href="/pwdResetRequest"}>I have forgot my password?</small>
           <button type="submit" className="bg-blue-500 p-2 rounded-lg no-underline text-white">Login</button>
-          <small className=""> Don't have account? Sign in <span className=" text-blue-500 hover:underline text-left cursor-pointer" onClick={()=>window.location.href="/register"}>here</span></small>
+          <small className=""> Don't have account? Sign up <span className=" text-blue-500 hover:underline text-left cursor-pointer" onClick={()=>window.location.href="/register"}>here</span></small>
         </form>
       </div>
     </div>}
@@ -100,7 +103,7 @@ export const Login = () => {
             </div>
             <small className=" text-blue-500 hover:underline text-underline text-right cursor-pointer" onClick={()=>window.location.href="/pwdResetRequest"}>I have forgot my password?</small>
           <button type="submit" className="bg-blue-500 p-2 rounded-lg no-underline text-white">Login</button>
-          <small className=""> Don't have account? Sign in <span className=" text-blue-500 hover:underline text-left cursor-pointer" onClick={()=>window.location.href="/register"}>here</span></small>
+          <small className=""> Don't have account? Sign up <span className=" text-blue-500 hover:underline text-left cursor-pointer" onClick={()=>window.location.href="/register"}>here</span></small>
         </form>
       </div>
     </div>}
