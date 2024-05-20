@@ -142,51 +142,75 @@ class TokenIsExpiredOrObjectAPI(generics.GenericAPIView):
         
 class LabTechSignUpAPIView(generics.GenericAPIView):
     """APIView for Lab Technician Sign up"""
-    serializer_class = LabTechSignUpSerializer
-    
+    serializer_class = UserRegisterSerializer
+
     def post(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.validated_data
-        serializer.validated_data["is_lab_technician"] = True
-        serializer.validated_data["is_verified"] = True
-        print(serializer.validated_data, type(serializer.validated_data))
+        serializer.validated_data 
         serializer.save()
-        print(serializer.save())
-
-        return Response("lab technician created", status=status.HTTP_200_OK)
+        # After the user is been saved, we want to send a verification email
+        if User.objects.filter(email=serializer.validated_data["email"]).exists():
+            user = User.objects.get(email=serializer.validated_data["email"])
+            refresh_token = RefreshToken.for_user(user)
+            access_token = str(refresh_token.access_token)
+            EMAIL_SUBJECT = 'Verify your email'
+            current_site = get_current_site(request).domain
+            rel_url = reverse('verify')
+            abs_url = "{}{}?token={}".format(current_site,rel_url,access_token)
+            EMAIL_BODY = "Hello {},\nPlease use the link below to verify your account\n{}".format(user.first_name, abs_url)
+            payload = {"EMAIL_SUBJECT": EMAIL_SUBJECT, 'EMAIL_BODY':EMAIL_BODY, "EMAIL_TO": user.email}
+            Utils.send_email(payload)
+            return Response("Lab Technician Created.", status=status.HTTP_200_OK)
+        return Response("Sorry the user does not exist", status=status.HTTP_400_BAD_REQUEST)
         
 class LabClerkSignUpAPIView(generics.GenericAPIView):
     """APIView for Lab Technician Sign up"""
-    serializer_class = LabClerkSignUpSerializer
-    
+    serializer_class = UserRegisterSerializer
+
     def post(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.validated_data
-        serializer.validated_data["is_clerk"] = True
-        serializer.validated_data["is_verified"] = True
-        print(serializer.validated_data, type(serializer.validated_data))
+        serializer.validated_data 
         serializer.save()
-        print(serializer.save())
-
-        return Response("lab clerk created", status=status.HTTP_200_OK)
+        # After the user is been saved, we want to send a verification email
+        if User.objects.filter(email=serializer.validated_data["email"]).exists():
+            user = User.objects.get(email=serializer.validated_data["email"])
+            refresh_token = RefreshToken.for_user(user)
+            access_token = str(refresh_token.access_token)
+            EMAIL_SUBJECT = 'Verify your email'
+            current_site = get_current_site(request).domain
+            rel_url = reverse('verify')
+            abs_url = "{}{}?token={}".format(current_site,rel_url,access_token)
+            EMAIL_BODY = "Hello {},\nPlease use the link below to verify your account\n{}".format(user.first_name, abs_url)
+            payload = {"EMAIL_SUBJECT": EMAIL_SUBJECT, 'EMAIL_BODY':EMAIL_BODY, "EMAIL_TO": user.email}
+            Utils.send_email(payload)
+            return Response("Lab clerk Created.", status=status.HTTP_200_OK)
+        return Response("Sorry the user does not exist", status=status.HTTP_400_BAD_REQUEST)
 
     
 class EmployerSignUpAPIView(generics.GenericAPIView):
     """APIView for Lab Technician Sign up"""
-    serializer_class = LabClerkSignUpSerializer
-    
+    serializer_class = UserRegisterSerializer
+
     def post(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.validated_data
-        serializer.validated_data["is_employer"] = True
-        serializer.validated_data["is_verified"] = True
-        print(serializer.validated_data, type(serializer.validated_data))
+        serializer.validated_data 
         serializer.save()
-        print(serializer.save())
-
-        return Response("employer created", status=status.HTTP_200_OK)
+        # After the user is been saved, we want to send a verification email
+        if User.objects.filter(email=serializer.validated_data["email"]).exists():
+            user = User.objects.get(email=serializer.validated_data["email"])
+            refresh_token = RefreshToken.for_user(user)
+            access_token = str(refresh_token.access_token)
+            EMAIL_SUBJECT = 'Verify your email'
+            current_site = get_current_site(request).domain
+            rel_url = reverse('verify')
+            abs_url = "{}{}?token={}".format(current_site,rel_url,access_token)
+            EMAIL_BODY = "Hello {},\nPlease use the link below to verify your account\n{}".format(user.first_name, abs_url)
+            payload = {"EMAIL_SUBJECT": EMAIL_SUBJECT, 'EMAIL_BODY':EMAIL_BODY, "EMAIL_TO": user.email}
+            Utils.send_email(payload)
+            return Response("Employer Created.", status=status.HTTP_200_OK)
+        return Response("Sorry the user does not exist", status=status.HTTP_400_BAD_REQUEST)
 
     

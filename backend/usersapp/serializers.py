@@ -10,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
 class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name', 'password']
+        exclude = ["user_permissions", "groups", "is_staff", "is_superuser", "last_login"]
         extra_kwargs = {"password":{"write_only": True}}
 
     def create(self, validated_data):
@@ -49,6 +49,10 @@ class LabTechSignUpSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["email","first_name","last_name","password", "is_lab_technician", "is_verified"]
+        extra_kwargs = {"password":{"write_only":True}}
+
+    def create(self, validated_data):
+        return User.objects.create_user(**validated_data)
     
 class LabClerkSignUpSerializer(serializers.ModelSerializer):
     class Meta:

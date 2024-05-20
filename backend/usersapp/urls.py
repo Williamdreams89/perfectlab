@@ -5,6 +5,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
     path("", UserListAPIView.as_view()),
+    path('register/', UserRegisterAPIView.as_view(), name="clerk_register"),
     path('labclerk/register/', LabClerkSignUpAPIView.as_view(), name="clerk_register"),
     path('labtech/register/', LabTechSignUpAPIView.as_view(), name="tech_register"),
     path('employer/register/', EmployerSignUpAPIView.as_view(), name="tech_register"),
