@@ -130,8 +130,8 @@ class TokenIsExpiredOrObjectAPI(generics.GenericAPIView):
             user = User.objects.get(id=payload["user_id"])
             return Response({
                 "username": f'{user.first_name} {user.last_name}',
-                "first_name": user.first_name,
-                "not_expired": True
+                "not_expired": True,
+                "user": user
             }, status=status.HTTP_200_OK)
         except jwt.exceptions.ExpiredSignatureError as e:
             return Response({"is_expired":True},status=status.HTTP_400_BAD_REQUEST)
