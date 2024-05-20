@@ -11,6 +11,9 @@ import jwt
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import smart_str, smart_bytes, force_str
+from .permissions import IsEmployer
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 class UserListAPIView(generics.ListAPIView):
     """List all the users"""
@@ -44,6 +47,12 @@ class UserRegisterAPIView(generics.GenericAPIView):
     
 
 class VerifyUserAPIView(views.APIView):
+    permission_classes = (IsEmployer)
+
+    token_param_config = openapi.Parameter(
+        "token", in_=openapi.IN_QUERY, description="Enter your  token", type=openapi.TYPE_STRING)
+
+    @swagger_auto_schema(manual_parameters=[token_param_config])
     def get(self, request):
         try:
             token = request.GET.get("token")
@@ -158,10 +167,10 @@ class LabTechSignUpAPIView(generics.GenericAPIView):
             current_site = get_current_site(request).domain
             rel_url = reverse('verify')
             abs_url = "{}{}?token={}".format(current_site,rel_url,access_token)
-            EMAIL_BODY = "Hello {},\nPlease use the link below to verify your account\n{}".format(user.first_name, abs_url)
+            EMAIL_BODY = "Hello {},\nPlease use the link below to verify your account\n{}\n\n[Please send this link to your employer, in the body of your mail, attach your cv and cover letter for review]".format(user.first_name, abs_url)
             payload = {"EMAIL_SUBJECT": EMAIL_SUBJECT, 'EMAIL_BODY':EMAIL_BODY, "EMAIL_TO": user.email}
             Utils.send_email(payload)
-            return Response("Lab Technician Created.", status=status.HTTP_200_OK)
+            return Response({"message":"Lab Technician Created.", "email_verify_link":abs_url}, status=status.HTTP_200_OK)
         return Response("Sorry the user does not exist", status=status.HTTP_400_BAD_REQUEST)
         
 class LabClerkSignUpAPIView(generics.GenericAPIView):
@@ -182,10 +191,10 @@ class LabClerkSignUpAPIView(generics.GenericAPIView):
             current_site = get_current_site(request).domain
             rel_url = reverse('verify')
             abs_url = "{}{}?token={}".format(current_site,rel_url,access_token)
-            EMAIL_BODY = "Hello {},\nPlease use the link below to verify your account\n{}".format(user.first_name, abs_url)
+            EMAIL_BODY = "Hello {},\nPlease use the link below to verify your account\n{}\n\n[Please send this link to your employer, in the body of your mail, attach your cv and cover letter for review]".format(user.first_name, abs_url)
             payload = {"EMAIL_SUBJECT": EMAIL_SUBJECT, 'EMAIL_BODY':EMAIL_BODY, "EMAIL_TO": user.email}
             Utils.send_email(payload)
-            return Response("Lab clerk Created.", status=status.HTTP_200_OK)
+            return Response({"message":"Lab clerk Created.", "email_verify_link":abs_url}, status=status.HTTP_200_OK)
         return Response("Sorry the user does not exist", status=status.HTTP_400_BAD_REQUEST)
 
     
@@ -210,7 +219,7 @@ class EmployerSignUpAPIView(generics.GenericAPIView):
             EMAIL_BODY = "Hello {},\nPlease use the link below to verify your account\n{}".format(user.first_name, abs_url)
             payload = {"EMAIL_SUBJECT": EMAIL_SUBJECT, 'EMAIL_BODY':EMAIL_BODY, "EMAIL_TO": user.email}
             Utils.send_email(payload)
-            return Response("Employer Created.", status=status.HTTP_200_OK)
+            return Response({"message":"Employer Created.", "email_verify_link":abs_url}, status=status.HTTP_200_OK)
         return Response("Sorry the user does not exist", status=status.HTTP_400_BAD_REQUEST)
 
     
