@@ -17,10 +17,11 @@
 .app{
   height: 100vh;
   overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .aside{
-
+  min-width: 300px
 }
 
 
@@ -32,16 +33,12 @@
 
 .menu_items{}
 
-@media screen and (max-width:400) {
-  .menu_items{
-    display: none;
-  };
-
+@media screen and (min-width:400px) and (max-width:900px) {
   .aside{
-    display: none;
+    min-width: 300px;
   }
 
-  .barchart{
-    width: 500px;
+  .app{
+    overflow-x: visible;
   }
 }

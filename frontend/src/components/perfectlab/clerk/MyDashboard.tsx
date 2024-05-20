@@ -24,7 +24,7 @@ const MyDashboard = () => {
   return (
     <div className='ml-[2rem] flex flex-col gap-3 ' style={{minWidth:"100vw", height:"100%"}}>
       <div><h2 className=' text-3xl font-bold'>Welcome back, {localStorage.getItem("username")}</h2></div>
-      <div className=" flex justify-between w-[70%] items-center">
+      <div className=" flex justify-between w-[900px] items-center">
         <div className=" flex flex-col items-center">
         <RingProgress
         size={200}

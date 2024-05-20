@@ -21,7 +21,7 @@ const Aside = () => {
   }, []); 
   
   return (
-    <div className=' bg-black  text-gray-400 w-[] h-[100vh] pr-6 pl-6 aside'>
+    <div className=' bg-black  text-white h-[100vh] pr-6 pl-6 aside aside'>
         <h2 className=' pt-5 mb-4 text-3xl flex flex-row items-center justify-center'>Perfect Lab <img src="icons/lab.png" alt="" width={"30px"} /></h2>
         <ul className=' list-none w-[98%] rounded-2xl p-2 m-auto' style={{border:"1px solid rgba(107, 114, 128, .2)"}}>
             <li className=' w-[80%] cursor-pointer mb-[1rem] m-auto hover:text-white' onClick={()=>window.location.href=("/")} style={{borderBottom: "1px solid rgba(107, 114, 128, .2)"}}>My Dashboard</li>

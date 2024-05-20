@@ -27,7 +27,7 @@ const App = () => {
       // }, 28800000)
   },[])
   return (
-    <div className="app relative flex gap-2">
+    <div className="app w-[100vw] relative flex gap-2">
     <Aside />
     <div className=' h-[100vh] w-[60%] mt-[1rem]' style={{width:"6"}}>
     <Router>
