@@ -6,7 +6,7 @@ const PwdResetReq = () => {
     <div className=' flex justify-center items-center w-[100vw] h-[100vh] absolute bg-white z-50 left-0 top-0'>
         <form className=' flex justify-center items-center flex-col w-[90%] h-[250px] lg:w-[40%]' style={{border:"1px solid rgba(107, 114, 128, .2)"}}>
             <div className="flex justify-center items-center flex-col">
-                <h2 className=' text-2xl font-bold'>PerfectLab</h2>
+                <h2 className=' text-2xl font-bold'>LabIS</h2>
                 <h3>Send Password Reset Link</h3>
             </div>
             <div className=" flex flex-col gap-[1rem] w-[80%]">
