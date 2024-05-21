@@ -41,4 +41,8 @@
   .app{
     overflow-x: visible;
   }
+
+  .authLeftBox{
+    display: none;
+  }
 }

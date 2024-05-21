@@ -60,7 +60,7 @@ export const Login = () => {
 
   return (
     <div className="flex justify-center w-[100vw] h-[100vh] absolute bg-white z-50 left-0 top-0">
-      <div className="w-[25vw]  h-[100%] relative">
+      <div className=" authLeftBox md:w-[45vw] lg:w-[25vw]  h-[100%] relative">
         <div className=" flex items-center justify-center absolute top-0 left-0" style={{width:"100%", height:"100%", backgroundColor:"rgba(37, 99, 235, .8"}}>
           <div className="flex flex-col w-[90%] h-[90%] items-center justify-between">
             <h2 className=" text-5xl text-center text-white font-extrabold">LabIS</h2>
@@ -83,7 +83,9 @@ export const Login = () => {
       <LockOutlinedIcon />
       </div>
 
-    <div className=" w-max h-max absolute top-[6rem] right-3">
+      {currentPage?.value==="clerk" || currentPage?.value==="technician" || currentPage?.value==="employer" ? <p className=" font-bold text-center text-blue-600">Welcome to LabIS</p>:<p className="font-bold text-center text-blue-600">Select A Sign In Mode To Begin With</p>}
+
+    <div className=" w-max h-max absolute top-[7rem] right-3">
     <Select
         placeholder="Select loggin in mode"
         data={[{ value: 'technician', label: 'Log in as technician' },{ value: 'clerk', label: 'Log in as clerk' }, { value: 'employer', label: 'Log in as Employer' }]}
@@ -100,7 +102,7 @@ export const Login = () => {
         
       <div className="w-[90%] lg:w-[40vw]">
         
-        <form onSubmit={onFormSubmit} className=" w-[80%] m-auto mt-[6rem] h-[80%] flex flex-col gap-[2rem]">
+        <form onSubmit={onFormSubmit} className=" w-[80%] m-auto mt-[3rem] h-[80%] flex flex-col gap-[2rem]">
           <div className=" w-[95%] m-auto">
             <TextInput label='Email' withAsterisk type="email" onChange={emailChange} />
             <TextInput label="Password" withAsterisk type="password" onChange={passwordChange}/>
@@ -116,7 +118,7 @@ export const Login = () => {
         
       <div className="w-[90%] lg:w-[40vw]">
         
-        <form onSubmit={onFormSubmit} className=" w-[80%] m-auto mt-[6rem] h-[80%] flex flex-col gap-[2rem]">
+        <form onSubmit={onFormSubmit} className=" w-[80%] m-auto mt-[3rem] h-[80%] flex flex-col gap-[2rem]">
           <div className=" w-[95%] m-auto">
             <TextInput label='Email' withAsterisk type="email" onChange={emailChange} />
             <TextInput label="Password" withAsterisk type="password" onChange={passwordChange}/>
@@ -130,7 +132,7 @@ export const Login = () => {
     {currentPage?.value ==="employer" &&<div className="">
         
       <div className="w-[90%] lg:w-[40vw]">
-        <form onSubmit={onFormSubmit} className=" w-[80%] m-auto mt-[6rem] h-[80%] flex flex-col gap-[2rem]">
+        <form onSubmit={onFormSubmit} className=" w-[80%] m-auto mt-[3rem] h-[80%] flex flex-col gap-[2rem]">
           <div className=" w-[95%] m-auto">
             <TextInput label='Email' withAsterisk type="email" onChange={emailChange} />
             <TextInput label="Password" withAsterisk type="password" onChange={passwordChange}/>

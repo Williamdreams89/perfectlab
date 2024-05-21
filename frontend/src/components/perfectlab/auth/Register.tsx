@@ -77,7 +77,7 @@ export const Register = () => {
 
   return (
     <div className="flex gap-[5rem] w-[100vw] h-[100vh] absolute bg-white z-50 left-0 top-0">
-      <div className="w-[25vw]  h-[100%] relative">
+      <div className=" authLeftBox w-[25vw]  h-[100%] relative">
         <div className=" flex items-center justify-center absolute top-0 left-0" style={{width:"100%", height:"100%", backgroundColor:"rgba(37, 99, 235, .8"}}>
           <div className="flex flex-col w-[90%] h-[90%] items-center justify-between">
             <h2 className=" text-5xl text-center text-white font-extrabold">LabIS</h2>
@@ -96,16 +96,18 @@ export const Register = () => {
       {isError &&<Notification icon={<IconCheck style={{ width: rem(20), height: rem(20) }} />} color="teal" title="All good!" mt="md">
         Everything is fine
       </Notification>}
-      {isLoading ? <Loading />:<div className={`w-[600px] pb-[14rem] h-min mt-[4rem] relative`}>
+      {isLoading ? <Loading />:<div className={`w-[600px] pb-[14rem] h-min mt-[1rem] relative`}>
       {/* <h2 className=" mt-[1rem] text-center text-2xl font-extrabold"><span>Lab<span>IS</span> </span></h2> */}
       <div className="flex items-center justify-center w-[60px] h-[60px] rounded-full bg-black text-white m-auto">
       <LockOutlinedIcon />
       </div>
 
-    <div className=" w-max h-max absolute top-[6rem] right-3">
+      {currentPage?.value==="clerk" || currentPage?.value==="technician" || currentPage?.value==="employer" ? <p className=" font-bold text-center text-blue-600">Welcome to LabIS</p>:<p className="font-bold text-center text-blue-600">Select A Sign Up Mode To Begin With</p>}
+
+    <div className=" w-max h-max absolute top-[8rem] right-3">
     <Select
         placeholder="Select Sign up mode"
-        data={[{ value: 'technician', label: 'Sign up in as Technician' },{ value: 'clerk', label: 'Sign up in as Clerk' }, { value: 'employer', label: 'Sign up in as Employer' }]}
+        data={[{ value: 'technician', label: 'Sign up in as Technician' },{ value: 'clerk', label: 'Sign up in as Clerk' }, { value: 'employer', label: 'Sign up in as Employer' }, {value: "none", label:"nothing"}]}
         value={currentPage ? currentPage.value : null}
         onChange={(_value, option) => {setCurrentPage(option); console.log("option=", option, "\n","value=",_value)}}
         allowDeselect={false}
@@ -120,7 +122,7 @@ export const Register = () => {
         
       <div className="w-[90%] lg:w-[40vw]">
         
-        <form onSubmit={onFormSubmitForClerk} className=" w-[80%] m-auto mt-[6rem] h-[80%] flex flex-col gap-[2rem]">
+        <form onSubmit={onFormSubmitForClerk} className=" w-[80%] m-auto mt-[3rem] h-[80%] flex flex-col gap-[2rem]">
           <div className=" w-[95%] m-auto">
             <TextInput label='Email' withAsterisk type="email" onChange={emailChange} />
             <TextInput label="First Name" withAsterisk type="text" onChange={firsNameChange}/>
@@ -138,7 +140,7 @@ export const Register = () => {
         
       <div className="w-[90%] lg:w-[40vw]">
         
-        <form onSubmit={onFormSubmitForLabTech} className=" w-[80%] m-auto mt-[6rem] h-[80%] flex flex-col gap-[2rem]">
+        <form onSubmit={onFormSubmitForLabTech} className=" w-[80%] m-auto mt-[3rem] h-[80%] flex flex-col gap-[2rem]">
           <div className=" w-[95%] m-auto">
           <TextInput label='Email' withAsterisk type="email" onChange={emailChange} />
             <TextInput label="First Name" withAsterisk type="text" onChange={firsNameChange}/>
@@ -154,7 +156,7 @@ export const Register = () => {
     {currentPage?.value ==="employer" &&<div className="">
         
       <div className="w-[90%] lg:w-[40vw]">
-        <form onSubmit={onFormSubmitForEmployer} className=" w-[80%] m-auto mt-[6rem] h-[80%] flex flex-col gap-[2rem]">
+        <form onSubmit={onFormSubmitForEmployer} className=" w-[80%] m-auto mt-[3rem] h-[80%] flex flex-col gap-[2rem]">
           <div className=" w-[95%] m-auto">
             <TextInput label='Email' withAsterisk type="email" onChange={emailChange} />
             <TextInput label="First Name" withAsterisk type="text"  onChange={firsNameChange}/>
