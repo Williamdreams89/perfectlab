@@ -11,7 +11,7 @@ export const Login = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState<ComboboxItem | null>(null)
 
-  
+  const [loginStatus, setLoginStatus] = useState<any>()
 
   const onFormSubmit = async (event:any) => {
     event.preventDefault()
@@ -21,11 +21,24 @@ export const Login = () => {
       console.log(data, data["tokens"]["access_token"])
       localStorage.clear()
       localStorage.setItem("access_token_f", data["tokens"]["access_token"])
-      await axios.post("https://perfectlab-backend.onrender.com/user/", {token:localStorage.getItem("access_token_f")})
+      await axios.post("https://perfectlab-backend.onrender.com/user/check_token_exp/", {token:localStorage.getItem("access_token_f")})
       .then((response:any)=>{
-        console.log(response.data)
+        console.log("checked token output =",response.data, typeof response.data)
+
+        if(response.data["is_lab_tech"] == "True"){
+          console.log("is lab guy", response.data["is_lab_tech"])
+          localStorage.setItem("is_lab_technician", response.data["is_lab_tech"])
+        }
+        if(response.data["is_clerk"] == "True"){
+          localStorage.setItem("is_cler", response.data["is_clerk"])
+        }
+        if(response.data["is_employer"] == "True"){
+          localStorage.setItem("is_employer", response.data["is_employer"])
+        }
+        setLoginStatus(response.data)
+        setIsLoading(false)
       })
-      window.location.href = "/"
+      // window.location.href = "/"
     }catch(err){
       setIsLoading(false)
       alert("Wrong username or password")
