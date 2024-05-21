@@ -92,6 +92,8 @@ export const Register = () => {
         allowDeselect={false}
         />
     </div>
+    <small className=" absolute bottom-6 left-4"> I already have an account. Sign in <span className=" text-blue-500 hover:underline text-left cursor-pointer" onClick={()=>window.location.href="/login"}>here</span></small>
+
         {currentPage?.value ==="clerk" && <h3 className=" text-center">Sign up as a Clerk</h3>}
         {currentPage?.value ==="technician" && <h3 className=" text-center">Sign up as a Technician</h3>}
         {currentPage?.value ==="employer" && <h3 className=" text-center">Sign up as a Employer</h3>}

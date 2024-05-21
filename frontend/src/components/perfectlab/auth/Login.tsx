@@ -72,6 +72,7 @@ export const Login = () => {
         allowDeselect={false}
         />
     </div>
+    <small className=" absolute bottom-6 left-4"> Don't have account? Sign up <span className=" text-blue-500 hover:underline text-left cursor-pointer" onClick={()=>window.location.href="/register"}>here</span></small>
         {currentPage?.value ==="clerk" && <h3 className=" text-center">Sign In as a Clerk</h3>}
         {currentPage?.value ==="technician" && <h3 className=" text-center">Sign In as a Technician</h3>}
         {currentPage?.value ==="employer" && <h3 className=" text-center">Sign In as a Employer</h3>}

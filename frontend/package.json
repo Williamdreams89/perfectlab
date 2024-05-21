@@ -6,6 +6,8 @@
     "@devexpress/dx-react-core": "^4.0.8",
     "@devexpress/dx-react-scheduler": "^4.0.8",
     "@devexpress/dx-react-scheduler-material-ui": "^4.0.8",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@mantine/charts": "^7.9.2",
     "@mantine/core": "^7.9.1",
     "@mantine/dates": "^7.9.1",
