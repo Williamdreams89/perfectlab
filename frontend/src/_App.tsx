@@ -150,7 +150,7 @@ export default function _App() {
       </div>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open} className=' sm:w-[100vw] lg:w-[240px]' >
+      <Drawer variant="permanent" open={open} className=' drawer sm:w-[100vw] lg:w-[240px]' >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
