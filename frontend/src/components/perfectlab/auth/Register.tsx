@@ -16,6 +16,7 @@ export const Register = () => {
   const [currentPage, setCurrentPage] = useState<ComboboxItem | null>(null)
 
   const [isError, setIsError] = useState(false)
+  const [error, setError] = useState<string>()
 
   const onFormSubmitForClerk = async (event:any) => {
     event.preventDefault()
@@ -23,6 +24,7 @@ export const Register = () => {
       setIsLoading(true)
       const {data} = await axios.post("https://perfectlab-backend.onrender.com/user/labclerk/register/", {email:email, password:password, first_name:firstName, last_name:lastName, is_clerk:true})
       console.log(data)
+      window.location.href = "/login"
     }catch(err){
       setIsLoading(false)
       setIsError(true)
@@ -36,6 +38,7 @@ export const Register = () => {
       setIsLoading(true)
       const {data} = await axios.post("https://perfectlab-backend.onrender.com/user/labtech/register/", {email:email, password:password, first_name:firstName, last_name:lastName, is_lab_technician:true})
       console.log(data)
+      window.location.href = "/login"
     }catch(err){
       setIsLoading(false)
       alert("Something went wrong")
@@ -48,10 +51,13 @@ export const Register = () => {
     try{
       setIsLoading(true)
       const {data} = await axios.post("https://perfectlab-backend.onrender.com/user/employer/register/", {email:email, password:password,  first_name:firstName, last_name:lastName, is_employer:true})
+      window.location.href = "/login"
     }catch(err){
       setIsLoading(false)
       console.log({"first_name":firstName, "last_name":lastName})
-      alert("Wrong username or password")
+      alert("An error occured!!")
+      setIsError(true)
+      setError("An unexpected error occured")
       console.log("error login: ", err)
     }
   
@@ -93,12 +99,14 @@ export const Register = () => {
         </div>
         <img src="img/_auth.jpg" alt="" />
       </div>
-      {isError &&<Notification icon={<IconCheck style={{ width: rem(20), height: rem(20) }} />} color="teal" title="All good!" mt="md">
-        Everything is fine
-      </Notification>}
+      
       {isLoading ? <Loading />:<div className={`w-[600px] pb-[14rem] h-min mt-[1rem] relative`}>
-      {/* <h2 className=" mt-[1rem] text-center text-2xl font-extrabold"><span>Lab<span>IS</span> </span></h2> */}
-      <div className="flex items-center justify-center w-[60px] h-[60px] rounded-full bg-black text-white m-auto">
+      {/* {isError ?<Notification className=" absolute z-30" icon={<IconCheck style={{ width: rem(20), height: rem(20) }} />} color="teal" title="All good!" mt="md">
+        {error}
+      </Notification>:<Notification icon={<IconCheck style={{ width: rem(20), height: rem(20) }} />} color="teal" title="All good!" mt="md">
+        Sign up successful!
+      </Notification>} */}
+      <div className="flex items-center mb-[0.3rem] justify-center w-[50px] h-[50px] rounded-full bg-black text-white m-auto">
       <LockOutlinedIcon />
       </div>
 
@@ -113,7 +121,7 @@ export const Register = () => {
         allowDeselect={false}
         />
     </div>
-    <small className=" absolute bottom-6 left-4"> I already have an account. Sign in <span className=" text-blue-500 hover:underline text-left cursor-pointer" onClick={()=>window.location.href="/login"}>here</span></small>
+    {currentPage?.value==="clerk" || currentPage?.value==="technician" || currentPage?.value==="employer" ? null :<small className=" absolute bottom-6 left-4"> I already have an account. Sign in <span className=" text-blue-500 hover:underline text-left cursor-pointer" onClick={()=>window.location.href="/login"}>here</span></small>}
 
         {currentPage?.value ==="clerk" && <h3 className=" text-center">Sign up as a Clerk</h3>}
         {currentPage?.value ==="technician" && <h3 className=" text-center">Sign up as a Technician</h3>}

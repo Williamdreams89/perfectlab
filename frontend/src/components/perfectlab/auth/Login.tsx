@@ -21,6 +21,7 @@ export const Login = () => {
       console.log(data, data["tokens"]["access_token"])
       localStorage.clear()
       localStorage.setItem("access_token_f", data["tokens"]["access_token"])
+      
       await axios.post("https://perfectlab-backend.onrender.com/user/check_token_exp/", {token:localStorage.getItem("access_token_f")})
       .then((response:any)=>{
         console.log("checked token output =",response.data, typeof response.data)
@@ -36,7 +37,7 @@ export const Login = () => {
           localStorage.setItem("is_employer", response.data["is_employer"])
         }
         setLoginStatus(response.data)
-        setIsLoading(false)
+        window.location.href = "/"
       })
       // window.location.href = "/"
     }catch(err){
@@ -59,7 +60,7 @@ export const Login = () => {
   }
 
   return (
-    <div className="flex justify-center w-[100vw] h-[100vh] absolute bg-white z-50 left-0 top-0">
+    <div className="flex w-[100vw] h-[100vh] absolute bg-white z-50 left-0 top-0">
       <div className=" authLeftBox md:w-[45vw] lg:w-[25vw]  h-[100%] relative">
         <div className=" flex items-center justify-center absolute top-0 left-0" style={{width:"100%", height:"100%", backgroundColor:"rgba(37, 99, 235, .8"}}>
           <div className="flex flex-col w-[90%] h-[90%] items-center justify-between">
@@ -94,7 +95,7 @@ export const Login = () => {
         allowDeselect={false}
         />
     </div>
-    <small className=" absolute bottom-6 left-4"> Don't have account? Sign up <span className=" text-blue-500 hover:underline text-left cursor-pointer" onClick={()=>window.location.href="/register"}>here</span></small>
+    {currentPage?.value==="clerk" || currentPage?.value==="technician" || currentPage?.value==="employer" ? null :<small className=" absolute bottom-6 left-4"> Don't have account? Sign up <span className=" text-blue-500 hover:underline text-left cursor-pointer" onClick={()=>window.location.href="/register"}>here</span></small>}
         {currentPage?.value ==="clerk" && <h3 className=" text-center">Sign In as a Clerk</h3>}
         {currentPage?.value ==="technician" && <h3 className=" text-center">Sign In as a Technician</h3>}
         {currentPage?.value ==="employer" && <h3 className=" text-center">Sign In as a Employer</h3>}

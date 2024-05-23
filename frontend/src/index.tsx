@@ -7,9 +7,14 @@ import { MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import '@mantine/charts/styles.css';
+import '@mantine/notifications/styles.css';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom"
+import Notifications from '@mui/icons-material/Notifications';
+import DefaultLayout from './components/perfectlab/auth/DefaultRoutes';
 import { Login } from './components/perfectlab/auth/Login';
-
+import { Register } from './components/perfectlab/auth/Register';
+import PwdResetReq from './components/perfectlab/auth/PwdResetReq';
+import _App from './_App';
 
 
 const root = ReactDOM.createRoot(
@@ -18,9 +23,14 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <MantineProvider>
-    <App />
     <Router>
       <Routes>
+        <Route path="/" index element = {<_App />} />
+        <Route element={<DefaultLayout />}>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/pwdResetRequest" element={<PwdResetReq />} />
+        </Route>
       </Routes>
     </Router>
     </MantineProvider>

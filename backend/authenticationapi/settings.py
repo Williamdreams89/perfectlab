@@ -154,11 +154,19 @@ AUTH_USER_MODEL = 'usersapp.User'
 
 # Email backends 
 
+# EMAIL_BACKENDS = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+# EMAIL_HOST_USER = '2c56876723ead2'
+# EMAIL_HOST_PASSWORD = 'c7de827862af0c'
+# EMAIL_PORT = '2525'
+
 EMAIL_BACKENDS = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
-EMAIL_HOST_USER = '2c56876723ead2'
-EMAIL_HOST_PASSWORD = 'c7de827862af0c'
-EMAIL_PORT = '2525'
+# EMAIL_USE_SSL = True
+EMAIL_USE_TSL = True
+EMAIL_HOST = "livingcareservices.org"
+EMAIL_PORT = 465
+EMAIL_HOST_USER = "admin@livingcareservices.org"
+EMAIL_HOST_PASSWORD = "merquri1z"
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
